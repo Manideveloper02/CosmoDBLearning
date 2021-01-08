@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3WvjWLPUoJpdWg/DxmiR/3hJX4lOc+gmRzlJI4xQjfMaGc3IqKYuboO1moxf/UgIENeJ64T6uepXth6fInd4BA==",
+  "dgSpecHash": "X3eEfgBrAxo58aDdLBX0ah2lF5z2Ifs85NsPHhNSjXWY0LTuv60pVBlJlhnHHVIoJR197BJSUYrHfvavJfpNcA==",
   "success": true,
-  "projectFilePath": "D:\\cosmos-dotnet-core-todo-app-main\\src\\todo.csproj",
+  "projectFilePath": "D:\\LearningCosmos\\CosmoDBLearning\\todo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mani\\.nuget\\packages\\microsoft.azure.cosmos\\3.10.1\\microsoft.azure.cosmos.3.10.1.nupkg.sha512",
     "C:\\Users\\Mani\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",

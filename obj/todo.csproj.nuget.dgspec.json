@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\cosmos-dotnet-core-todo-app-main\\src\\todo.csproj": {}
+    "D:\\LearningCosmos\\CosmoDBLearning\\todo.csproj": {}
   },
   "projects": {
-    "D:\\cosmos-dotnet-core-todo-app-main\\src\\todo.csproj": {
+    "D:\\LearningCosmos\\CosmoDBLearning\\todo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\cosmos-dotnet-core-todo-app-main\\src\\todo.csproj",
+        "projectUniqueName": "D:\\LearningCosmos\\CosmoDBLearning\\todo.csproj",
         "projectName": "todo",
-        "projectPath": "D:\\cosmos-dotnet-core-todo-app-main\\src\\todo.csproj",
+        "projectPath": "D:\\LearningCosmos\\CosmoDBLearning\\todo.csproj",
         "packagesPath": "C:\\Users\\Mani\\.nuget\\packages\\",
-        "outputPath": "D:\\cosmos-dotnet-core-todo-app-main\\src\\obj\\",
+        "outputPath": "D:\\LearningCosmos\\CosmoDBLearning\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mani\\AppData\\Roaming\\NuGet\\NuGet.Config",
