@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 
 namespace todo.APIController
 {
@@ -15,19 +13,20 @@ namespace todo.APIController
 
     {
         private readonly ICosmosDbService<TEntity> _cosmosDbService;
-        public CoreController(ICosmosDbService<TEntity> cosmosDbService)
+        public const string _databaseName = "SampleDBTest";
+        public CoreController(CosmosClient cosmosClient, string containerName)
         {
-            _cosmosDbService = cosmosDbService;
+            _cosmosDbService = new CosmosDbService<TEntity>(cosmosClient, _databaseName, containerName);
         }
+       
+
         // GET: api/[controller]
         [HttpGet]
         public async Task<IEnumerable<TEntity>> Get()
         {
-            //return await repository.GetAll();
             var value = await _cosmosDbService.GetItemsAsync("SELECT * FROM c");
             return value;
         }
-
 
     }
 

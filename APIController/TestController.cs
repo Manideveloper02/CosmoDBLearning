@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 
 using todo.Models;
 
@@ -8,7 +9,8 @@ namespace todo.APIController
     [ApiController]
     public class TestController : CoreController<Item>
     {
-        public TestController(ICosmosDbService<Item> repository) : base(repository)
+        private const string ContainerName = "Test";
+        public TestController(CosmosClient cosmosClient) : base(cosmosClient, ContainerName)
         {
         }
     }

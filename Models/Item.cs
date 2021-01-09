@@ -15,5 +15,8 @@
 
         [JsonProperty(PropertyName = "isComplete")]
         public bool Completed { get; set; }
+
+        [JsonProperty(PropertyName = "Test")]
+        public string Test { get; set; }
     }
 }

@@ -9,6 +9,8 @@
 
     using todo.Models;
     using Microsoft.Azure.Cosmos;
+    using todo.Services;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -22,7 +24,8 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<ICosmosDbService<Item>>(InitializeCosmosClientInstanceAsync<Item>(Configuration.GetSection("CosmosDb")).GetAwaiter().GetResult());
+            services.AddSingleton(InitializeCosmosClientInstance(Configuration.GetSection("CosmosDb")));
+            services.AddScoped<TestRepo>();
         }
         // </ConfigureServices> 
 
@@ -54,24 +57,24 @@
             });
         }
 
-        // <InitializeCosmosClientInstanceAsync>        
-        /// <summary>
-        /// Creates a Cosmos DB database and a container with the specified partition key. 
-        /// </summary>
-        /// <returns></returns>
-        private static async Task<CosmosDbService<T>> InitializeCosmosClientInstanceAsync<T>(IConfigurationSection configurationSection)
-            where T : class
+        private static CosmosClient InitializeCosmosClientInstance(IConfigurationSection configurationSection)
         {
-            string databaseName = configurationSection.GetSection("DatabaseName").Value;
-            string containerName = configurationSection.GetSection("ContainerName").Value;
             string account = configurationSection.GetSection("Account").Value;
             string key = configurationSection.GetSection("Key").Value;
-            CosmosClient client = new CosmosClient(account, key);
-            CosmosDbService<T> cosmosDbService = new CosmosDbService<T>(client, databaseName, containerName);
-            DatabaseResponse database = await client.CreateDatabaseIfNotExistsAsync(databaseName);
-            await database.Database.CreateContainerIfNotExistsAsync(containerName, "/id");
-            return cosmosDbService;
+            CosmosClientOptions clientOptions = new CosmosClientOptions() { SerializerOptions = new CosmosSerializationOptions() { IgnoreNullValues = true } };
+            CosmosClient client = new CosmosClient(account, key, clientOptions);
+            return client;
         }
-        // </InitializeCosmosClientInstanceAsync>
+
+        public static async Task InitializeDatabase(CosmosClient cosmosClient, string databaseName)
+        {
+            DatabaseResponse database = await cosmosClient.CreateDatabaseIfNotExistsAsync(databaseName);
+        }
+
+        public static async Task InitializeContainer(DatabaseResponse database, string containerName, string partitionKeyPath)
+        {
+            await database.Database.CreateContainerIfNotExistsAsync(containerName, partitionKeyPath);
+        }
+
     }
 }
